@@ -6,60 +6,95 @@ public class Oblig1 {
 	
 	// Oppgave 1
 	
-	public static int min(int[] a){
-		
+	public static int min(int[] a)
+	{
 		if ( a.length < 1 )
 			throw new java.util.NoSuchElementException("Tabellen er tom!");
 		
-		int n = a.length;							
-		int k;
-		
-		for (int m = n; m >= 0; m--){
-			for (int i = 0; i < n - 1; i++){
-				k = i + 1;
-				
-				if(a[i] > a[k]){
-					int t;
-					t = a[i];
-					a[i] = a[k];
-					a[k] = t;
-				}
+		for (int i = 1; i < a.length; i++)
+		{
+			int j = i + 1;
+			
+			if (a[a.length-i] < a[a.length-j])
+			{
+					int temp = a[a.length-i];
+					a[a.length-i] = a[a.length-j];
+					a[a.length-j] = temp;
 			}
 		}
 		return a[0];
 	}
 	
 	/* Hvor mange sammenligninger av tabellverdier blir det (som funksjon av n)?
-	 * Da dette er en boblesortering vil antall sammenligninger i verste tilfelle
-	 * være n(n-1)/2 sammenligninger.
+	 *
+	 * I dette tilfellet er det bare n - 1 sammenligninger. 
 	 */
 	
-	public static int ombyttinger(int[] a){
+	// Metoden ombyttinger:
+	
+	public static int ombyttinger(int[] a)
+	{
+		int ombytt = 0;
 		
-		int o = 0;
+		if ( a.length < 1 )
+			throw new java.util.NoSuchElementException("Tabellen er tom!");
 		
-		int n = a.length;							
-		int k;
+		for (int i = 1; i < a.length; i++)
+		{
+			int j = i + 1;
+			
+			if (a[a.length-i] < a[a.length-j])
+			{
+					int temp = a[a.length-i];
+					a[a.length-i] = a[a.length-j]; ombytt++;
+					a[a.length-j] = temp;
+			}
+		}
+		return ombytt;
+	}
+	
+	/* Kan du på grunnlag av dette si om metoden min er bedre (eller dårligere) enn de min-metodene vi har sett tidligere?
+	 * 
+	 * Denne min metoden er bedre, da den kun sorterer slik at minste tall er først og tar ikke hensyn til om resten av tallene er sortert.
+	 */
+	
+	// Oppgave 2:
+	
+	public static int modus1(int[] a)
+	{
+		for (int i = 1; i < a.length; i++)
+		{
+			if ( a.length < 1 || a[i-1] > a[i])
+				throw new IllegalStateException("a er en ugyldig tabell!");
+		}	
+		int modus = a[0];
+		int maksteller = 0;
 		
-		for (int m = n; m >= 0; m--){
-			for (int i = 0; i < n - 1; i++){
-				k = i + 1;
-				
-				if(a[i] > a[k]){
-					int t;
-					t = a[i];
-					a[i] = a[k]; o++;
-					a[k] = t;
+		for (int j = 0; j < a.length; j++)
+		{
+			int verdi = a[j];
+			int teller = 1;
+			
+			for (int k = 0; k < a.length; k++)
+			{
+				if (a[k] == verdi) teller++;
+				if (teller > maksteller)
+				{
+					modus = verdi;
+					maksteller = teller;
 				}
 			}
 		}
-		return o;
+		return modus;
 	}
+
 	
 	public static void main (String[] args){
 		
-		int[] b = {4,6,2,1,3};
+		int[] b = {0,0,0,0,1,1,2,2,3,3,3};
 		
-		System.out.println(ombyttinger(b));
+		System.out.println(modus1(b));
 	}
 }
+
+
