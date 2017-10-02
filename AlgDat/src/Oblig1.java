@@ -1,4 +1,5 @@
-import java.util.Arrays;
+
+import java.util.*;
 
 /* Andreas Vestøl Løvsletten 
  * s315305 
@@ -193,31 +194,53 @@ public class Oblig1 {
 		}
 	}
 	
-	// Oppgave 7:
+	// Oppgave 7a:
 	public static String flett(String s, String t)
 	{
-		char[] s1 = s.toCharArray();
-		char[] t1 = t.toCharArray();
-		char[] f = new char [s1.length + t1.length];
+		int k = Math.min(s.length(), t.length());
+		StringBuilder a = new StringBuilder();
 		
-		for (int i = 0; i < f.length; i++ )
+		for (int i = 0; i < k; i++)
 		{
-			for (int k = 0; k < s.length(); k++)
-			{
-				for (int j = 0; j < t.length(); j++)
-				{
-				
-				}
-			}
+			a.append(s.charAt(i)).append(t.charAt(i));
 		}
+		
+		a.append(s.substring(k)).append(t.substring(k));
+		
+		return a.toString();
 	}
-
+	
+	// 7b:
+	public static String flett(String... s)
+	{
+		StringBuilder a = new StringBuilder();
+		int j = 0;
+		int k = 0;
+		int r = 0;
+		int t = 0;
+		int p = 0;
+		
+		for (int i = 0; i < s.length; i++)
+		{
+			if (s[i].length() == 0) j = i;
+			if (s[i].length() == 1) k = i;
+		}
+		
+	
+	}
+	
+	public static void tidSorteringer(int[] a)
+	{
+		
+		
+	}
+	
 	public static void main (String[] args)
 	{	
-		String a = flett("ABC", "DEFGH");
-		String b = flett("IJKLMN", "OPQ");
-		String c = flett(" ", "AB");
+		String a = flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
 		System.out.println(a);
+		
+		
 	}
 }
 
