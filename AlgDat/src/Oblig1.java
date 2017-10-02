@@ -166,20 +166,58 @@ public class Oblig1 {
 		a[0] = første;
 	}
 	
-	// Oppgave 6:
+	// Oppgave 6: Lager en metode for største felles divisor først
+	public static int gcd(int a, int b)
+	{
+		return b == 0 ? a: gcd(b, a % b);
+	}
+	
 	public static void rotasjon(char[] a, int k)
 	{
-		if (a.length <= 1) return;
-		if ((k %= a.length) < 0) k += a.length;
+		int n = a.length; if (n < 2) return;
+		if ((k %= n) < 0) k += n;
 		
+		int s = gcd(n,k);
+		
+		for (int m = 0;  m < s; m++)
+		{
+			char verdi = a[m];
+			
+			for (int i = m - k, j = m; i != m; i -= k)
+			{
+				if (i < 0) i += n;
+				a[j] = a[i]; j = i;
+			}
+			
+			a[m + k] = verdi;
+		}
+	}
 	
+	// Oppgave 7:
+	public static String flett(String s, String t)
+	{
+		char[] s1 = s.toCharArray();
+		char[] t1 = t.toCharArray();
+		char[] f = new char [s1.length + t1.length];
+		
+		for (int i = 0; i < f.length; i++ )
+		{
+			for (int k = 0; k < s.length(); k++)
+			{
+				for (int j = 0; j < t.length(); j++)
+				{
+				
+				}
+			}
+		}
 	}
 
-	public static void main (String[] args){
-		
-		char[] b = {'A','B','C','D','E','F','G','H','I','J'};
-		rotasjon(b, 5);
-		System.out.println(Arrays.toString(b));
+	public static void main (String[] args)
+	{	
+		String a = flett("ABC", "DEFGH");
+		String b = flett("IJKLMN", "OPQ");
+		String c = flett(" ", "AB");
+		System.out.println(a);
 	}
 }
 
