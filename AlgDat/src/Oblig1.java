@@ -8,7 +8,6 @@ import java.util.*;
 public class Oblig1 {
 	
 	// Oppgave 1
-	
 	public static int min(int[] a)
 	{	
 		if ( a.length < 1 ) throw new java.util.NoSuchElementException("Tabellen er tom!");
@@ -33,7 +32,6 @@ public class Oblig1 {
 	 */
 	
 	// Metoden ombyttinger:
-	
 	public static int ombyttinger(int[] a)
 	{
 		if ( a.length < 1 ) throw new java.util.NoSuchElementException("Tabellen er tom!");
@@ -60,12 +58,11 @@ public class Oblig1 {
 	 */
 	
 	// Oppgave 2:
-	
 	public static int modus1(int[] a)
 	{
 		if ( a.length == 0 ) throw new IllegalStateException("tabellen er tom!");												// tabellen kan ikke være tom
 		for (int i = 1; i < a.length; i++)
-		if ( a[i-1] > a[i] ) throw new IllegalStateException("tabellen er ikke sortert stigende!");	// tabellen må være stigende
+		if ( a[i-1] > a[i] ) throw new IllegalStateException("tabellen er ikke sortert stigende!");			// tabellen må være stigende
 			
 			int modus = a[0];
 			int maksTeller = 0;
@@ -89,7 +86,6 @@ public class Oblig1 {
 	}
 
 	// Oppgave 3:
-	
 	public static int modus2(int[] a)
 	{
 		if (a.length == 0) throw new IllegalStateException("tabellen er tom!");
@@ -116,44 +112,45 @@ public class Oblig1 {
 	}
 	
 	// Oppgave 4:
-	
 	public static void delsortering(int[] a)
 	{
-		int temp = 0;
-		int v = 0;
-		int h = a.length-1;
-
-		for (int i = 0; i < a.length; i++)																			// sorterer partall på vs og oddetall på hs
+		int n = a.length;
+		int v = 0, h = n-1;
+		
+		int t = 0; 
+		
+		while (v < h && n > 0)
 		{
-			while (v < h && a[v] % 2 != 0) v++;																		// øker v hvis oddetall på venstre side
-			while (v < h && a[h] % 2 == 0) h--;																		// minsker h hvis partall på høyre side
-				
-				if (a[v] % 2 == 0 && a[h] % 2 != 0)																	// bytter a[v] med a[h] dersom a[v] er partall og a[h] er oddetall
-				{
-					temp = a[v];
-					a[v] = a[h];
-					a[h] = temp;
-				}
-		}
-		for (int j = 0; j < a.length; j++)																			
-		{
-			for (int i = 1; i < a.length; i++)
+			while (a[v] % 2 != 0 && v < h)
 			{
-				if (a[i-1] > a[i] && a[i] % 2 != 0 && a[i-1] % 2 != 0)							// sorterer oddetall stigende
-				{
-					temp = a[i-1];
-					a[i-1] = a[i];
-					a[i] = temp;
-				}
-				else if (a[i-1] > a[i] && a[i] % 2 == 0 && a[i-1] % 2 == 0)					// sorterer partall stigende
-				{
-					temp = a[i-1];
-					a[i-1] = a[i];
-					a[i] = temp;
-				}
+				v++;
+				t++;
+			}
+			
+			while (a[h] % 2 == 0 && v < h)
+				h--;
+			
+			if (v < h)
+			{
+				int temp = a[v];
+				a[v] = a[h];
+				a[h] = temp;
 			}
 		}
+		if (n > 0)																		// sorterer bare tabellen hvis lengden er større enn 0
+		{
+			if (a[0] % 2 != 0 && a[n-1] % 2 == 0)				// hvis oddetall på VS og partall på HS sorterer vi hver side for seg 
+			{
+				Arrays.sort(a, 0, t);											// oddetall sorteres 
+				Arrays.sort(a, t, n);											// partall sorteres
+			}
+				
+			else 
+				Arrays.sort(a,0,n);												// sorterer hele tabellen på én gang hvis tabellen kun inneholder oddetall eller partall
+		}
 	}
+	
+		
 	
 	// Oppgave 5:
 	public static void rotasjon(char [] a)
@@ -162,9 +159,9 @@ public class Oblig1 {
 		
 		char første = a[a.length -1];
 		
-		for (int i = a.length-1; i >= 1 ; i--) a[i] = a[i-1];
+		for (int i = a.length-1; i >= 1 ; i--) a[i] = a[i-1];   // flytter alle elementene én plass til høyre
 		
-		a[0] = første;
+		a[0] = første;																					// setter inn siste element som første.
 	}
 	
 	// Oppgave 6: Lager en metode for største felles divisor først
@@ -189,7 +186,6 @@ public class Oblig1 {
 				if (i < 0) i += n;
 				a[j] = a[i]; j = i;
 			}
-			
 			a[m + k] = verdi;
 		}
 	}
@@ -202,7 +198,7 @@ public class Oblig1 {
 		
 		for (int i = 0; i < k; i++)
 		{
-			a.append(s.charAt(i)).append(t.charAt(i));
+			a.append(s.charAt(i)).append(t.charAt(i));		
 		}
 		
 		a.append(s.substring(k)).append(t.substring(k));
@@ -213,34 +209,17 @@ public class Oblig1 {
 	// 7b:
 	public static String flett(String... s)
 	{
-		StringBuilder a = new StringBuilder();
-		int j = 0;
-		int k = 0;
-		int r = 0;
-		int t = 0;
-		int p = 0;
+		StringBuilder t = new StringBuilder();
 		
-		for (int i = 0; i < s.length; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			if (s[i].length() == 0) j = i;
-			if (s[i].length() == 1) k = i;
+			for (int j = 0; j < s.length; j++)
+			{
+				if (s[j].length() < i);
+				if (s[j].length() > i) t.append(s[j].charAt(i));
+			}
 		}
-		
-	
-	}
-	
-	public static void tidSorteringer(int[] a)
-	{
-		
-		
-	}
-	
-	public static void main (String[] args)
-	{	
-		String a = flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
-		System.out.println(a);
-		
-		
+		return t.toString();
 	}
 }
 
