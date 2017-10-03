@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 /* Andreas Vestøl Løvsletten 
  * s315305 
@@ -211,13 +211,26 @@ public class Oblig1 {
 			}
 		}
 	}
+	
+	public static String flett (String...s)
+	{
+		StringBuilder t = new StringBuilder();
+		
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < s.length; j++)
+			{
+				if (s[j].length() < i);
+				if (s[j].length() > i) t.append(s[j].charAt(i));
+			}
+		}
+		return t.toString();
+	}
 
 	public static void main (String[] args)
 	{	
-		String a = flett("ABC", "DEFGH");
-		String b = flett("IJKLMN", "OPQ");
-		String c = flett(" ", "AB");
-		System.out.println(a);
+		String[] a = {"AM ","L","GRE","OPKE",""};
+		System.out.println(flett(a));
 	}
 }
 
