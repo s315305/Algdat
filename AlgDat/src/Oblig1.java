@@ -213,20 +213,17 @@ public class Oblig1 {
 	// 7b:
 	public static String flett(String... s)
 	{
-		StringBuilder a = new StringBuilder();
-		int j = 0;
-		int k = 0;
-		int r = 0;
-		int t = 0;
-		int p = 0;
+		StringBuilder t = new StringBuilder();
 		
-		for (int i = 0; i < s.length; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			if (s[i].length() == 0) j = i;
-			if (s[i].length() == 1) k = i;
+			for (int j = 0; j < s.length; j++)
+			{
+				if (s[j].length() < i);
+				if (s[j].length() > i) t.append(s[j].charAt(i));
+			}
 		}
-		
-	
+		return t.toString();
 	}
 	
 	public static void tidSorteringer(int[] a)

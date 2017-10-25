@@ -131,4 +131,5 @@ public class Tabell 									// Samleklasse for tabellmetoder
 		skriv(a, 0, a.length);
 	}
 	
+	
 }
